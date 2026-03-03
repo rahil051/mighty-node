@@ -1,65 +1,54 @@
-import { error } from "console";
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function racable() {
-  return Promise.race([
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve("First promise resolved");
-      }, 0);
-    }),
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        reject(new Error("Second promise resolved"));
-      }, 500);
-    })
-  ]);
+    return Promise.race([
+        new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve("First promise resolved");
+            }, 0);
+        }),
+        new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error("Second promise resolved"));
+            }, 500);
+        })
+    ]);
 }
-
 racable().then(console.log).catch(console.error);
-
-function verify(value: number) {
-  if (value > 0) {
-    return Promise.resolve(value);
-  }
-  return Promise.reject(new Error("Value must be greater than 0"));
+function verify(value) {
+    if (value > 0) {
+        return Promise.resolve(value);
+    }
+    return Promise.reject(new Error("Value must be greater than 0"));
 }
-
 verify(parseInt(process.argv[2], 10))
-  .then(value => {
-    return value
-  },
-  error => {
-    console.error(`Error: ${error.message}`);
+    .then(function (value) {
+    return value;
+}, function (error) {
+    console.error("Error: ".concat(error.message));
     return 0; // Return a default value on error
-  }
-).then(value => {
-  console.log(`Value: ${value}`);
-}).catch(error => {
-  console.error(`Caught error: ${error.message}`);
-}).finally(() => {
-  console.log("Execution completed");
+}).then(function (value) {
+    console.log("Value: ".concat(value));
+}).catch(function (error) {
+    console.error("Caught error: ".concat(error.message));
+}).finally(function () {
+    console.log("Execution completed");
 });
-
 // function execTimeout() {
 //   const timer = 500;
-
 //   if (count == 0) {
 //     console.log("execution completed");
 //     return;
 //   }
-
 //   setTimeout(() => {
 //     console.log("setTimeout executed");
 //     count--;
 //     execTimeout();
 //   }, timer);
 // }
-
 // execTimeout()
-
 // const keyword = new RegExp(process.argv[2]);
 // const textSearch = new TextSearch(keyword);
-
 // textSearch
 //   .addFile('./assets/documents/a.txt')
 //   .addFile('./assets/documents/b.txt')
